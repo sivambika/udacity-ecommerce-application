@@ -10,8 +10,7 @@ import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -68,6 +67,22 @@ public class UserControllerTest {
         assertEquals(0, u.getId());
         assertEquals(USER_NAME, u.getUsername());
         assertEquals("thisIsHashed", u.getPassword());
+    }
+
+    @Test
+    public void findByInvalidId() {
+        when(userRepo.findById(0L)).thenReturn(java.util.Optional.ofNullable(null));
+        final ResponseEntity<User> userResponseEntity = userController.findById(0L);
+        User u = userResponseEntity.getBody();
+        assertNull(u);
+    }
+
+    @Test
+    public void findByInvalidUserName() {
+        when(userRepo.findByUsername(USER_NAME)).thenReturn(null);
+        final ResponseEntity<User> userResponseEntity = userController.findByUserName(USER_NAME);
+        User u = userResponseEntity.getBody();
+        assertNull(u);
     }
 
     @Test
