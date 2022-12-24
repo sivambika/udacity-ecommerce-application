@@ -57,7 +57,7 @@ public class CartController {
     }
 
     @PostMapping("/removeFromCart")
-    public ResponseEntity<Cart> removeFromcart(@RequestBody ModifyCartRequest request) {
+    public ResponseEntity<Cart> removeFromCart(@RequestBody ModifyCartRequest request) {
         User user = userRepository.findByUsername(request.getUsername());
         if (Objects.isNull(user)) {
             logger.error("User not found for username, {}.", request.getUsername());

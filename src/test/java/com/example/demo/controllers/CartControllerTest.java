@@ -131,7 +131,7 @@ public class CartControllerTest {
         request.setQuantity(1);
         request.setUsername("test");
 
-        ResponseEntity<Cart> response = cartController.removeFromcart(request);
+        ResponseEntity<Cart> response = cartController.removeFromCart(request);
 
         assertNotNull(response);
         assertEquals(404, response.getStatusCodeValue());
@@ -161,7 +161,7 @@ public class CartControllerTest {
         request.setQuantity(1);
         request.setUsername("test");
 
-        ResponseEntity<Cart> response = cartController.removeFromcart(request);
+        ResponseEntity<Cart> response = cartController.removeFromCart(request);
 
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
